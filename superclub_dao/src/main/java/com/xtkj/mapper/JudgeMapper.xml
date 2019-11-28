@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.JudgeMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.Judge">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="JUDGE_TYPE" jdbcType="DECIMAL" property="judgeType" />
+    <result column="FILE_ID" jdbcType="VARCHAR" property="fileId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="JUDGE_TIME" jdbcType="TIMESTAMP" property="judgeTime" />
+    <result column="OK" jdbcType="DECIMAL" property="ok" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, JUDGE_TYPE, FILE_ID, USER_ID, JUDGE_TIME, OK, UPDATE_TIME, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_JUDGE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_JUDGE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.Judge">
+    insert into TB_JUDGE (ID, JUDGE_TYPE, FILE_ID, 
+      USER_ID, JUDGE_TIME, OK, 
+      UPDATE_TIME, CREATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{judgeType,jdbcType=DECIMAL}, #{fileId,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{judgeTime,jdbcType=TIMESTAMP}, #{ok,jdbcType=DECIMAL}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.Judge">
+    insert into TB_JUDGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="judgeType != null">
+        JUDGE_TYPE,
+      </if>
+      <if test="fileId != null">
+        FILE_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="judgeTime != null">
+        JUDGE_TIME,
+      </if>
+      <if test="ok != null">
+        OK,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeType != null">
+        #{judgeType,jdbcType=DECIMAL},
+      </if>
+      <if test="fileId != null">
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeTime != null">
+        #{judgeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ok != null">
+        #{ok,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.Judge">
+    update TB_JUDGE
+    <set>
+      <if test="judgeType != null">
+        JUDGE_TYPE = #{judgeType,jdbcType=DECIMAL},
+      </if>
+      <if test="fileId != null">
+        FILE_ID = #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeTime != null">
+        JUDGE_TIME = #{judgeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ok != null">
+        OK = #{ok,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.Judge">
+    update TB_JUDGE
+    set JUDGE_TYPE = #{judgeType,jdbcType=DECIMAL},
+      FILE_ID = #{fileId,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      JUDGE_TIME = #{judgeTime,jdbcType=TIMESTAMP},
+      OK = #{ok,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

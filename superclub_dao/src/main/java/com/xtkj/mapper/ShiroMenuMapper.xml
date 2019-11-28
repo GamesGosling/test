@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.ShiroMenuMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.ShiroMenu">
+    <id column="MENU_ID" jdbcType="DECIMAL" property="menuId" />
+    <result column="MENU_NAMER" jdbcType="VARCHAR" property="menuNamer" />
+    <result column="MENU_URL" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="CHILD_ID" jdbcType="VARCHAR" property="childId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MENU_ID, MENU_NAMER, MENU_URL, PARENT_ID, CHILD_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_SHIRO_MENU
+    where MENU_ID = #{menuId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from TB_SHIRO_MENU
+    where MENU_ID = #{menuId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.ShiroMenu">
+    insert into TB_SHIRO_MENU (MENU_ID, MENU_NAMER, MENU_URL, 
+      PARENT_ID, CHILD_ID)
+    values (#{menuId,jdbcType=DECIMAL}, #{menuNamer,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=VARCHAR}, #{childId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.ShiroMenu">
+    insert into TB_SHIRO_MENU
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        MENU_ID,
+      </if>
+      <if test="menuNamer != null">
+        MENU_NAMER,
+      </if>
+      <if test="menuUrl != null">
+        MENU_URL,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="childId != null">
+        CHILD_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=DECIMAL},
+      </if>
+      <if test="menuNamer != null">
+        #{menuNamer,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="childId != null">
+        #{childId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.ShiroMenu">
+    update TB_SHIRO_MENU
+    <set>
+      <if test="menuNamer != null">
+        MENU_NAMER = #{menuNamer,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="childId != null">
+        CHILD_ID = #{childId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MENU_ID = #{menuId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.ShiroMenu">
+    update TB_SHIRO_MENU
+    set MENU_NAMER = #{menuNamer,jdbcType=VARCHAR},
+      MENU_URL = #{menuUrl,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      CHILD_ID = #{childId,jdbcType=VARCHAR}
+    where MENU_ID = #{menuId,jdbcType=DECIMAL}
+  </update>
+</mapper>

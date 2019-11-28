@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.UserAdviceMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.UserAdvice">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="ADVICE" jdbcType="VARCHAR" property="advice" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="DO_STATUS" jdbcType="DECIMAL" property="doStatus" />
+    <result column="SHEN_HE_STATUS" jdbcType="DECIMAL" property="shenHeStatus" />
+    <result column="CONTACT_WAY" jdbcType="VARCHAR" property="contactWay" />
+    <result column="IS_UPPER_TRACKER" jdbcType="DECIMAL" property="isUpperTracker" />
+    <result column="INFO_LEVEL" jdbcType="DECIMAL" property="infoLevel" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ADVICE, USER_ID, DO_STATUS, SHEN_HE_STATUS, CONTACT_WAY, IS_UPPER_TRACKER, INFO_LEVEL, 
+    UPDATE_TIME, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_USER_ADVICE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_USER_ADVICE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.UserAdvice">
+    insert into TB_USER_ADVICE (ID, ADVICE, USER_ID, 
+      DO_STATUS, SHEN_HE_STATUS, CONTACT_WAY, 
+      IS_UPPER_TRACKER, INFO_LEVEL, UPDATE_TIME, 
+      CREATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{advice,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{doStatus,jdbcType=DECIMAL}, #{shenHeStatus,jdbcType=DECIMAL}, #{contactWay,jdbcType=VARCHAR}, 
+      #{isUpperTracker,jdbcType=DECIMAL}, #{infoLevel,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP}, 
+      sysdate)
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.UserAdvice">
+    insert into TB_USER_ADVICE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="advice != null">
+        ADVICE,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="doStatus != null">
+        DO_STATUS,
+      </if>
+      <if test="shenHeStatus != null">
+        SHEN_HE_STATUS,
+      </if>
+      <if test="contactWay != null">
+        CONTACT_WAY,
+      </if>
+      <if test="isUpperTracker != null">
+        IS_UPPER_TRACKER,
+      </if>
+      <if test="infoLevel != null">
+        INFO_LEVEL,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="advice != null">
+        #{advice,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="doStatus != null">
+        #{doStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="shenHeStatus != null">
+        #{shenHeStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="contactWay != null">
+        #{contactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="isUpperTracker != null">
+        #{isUpperTracker,jdbcType=DECIMAL},
+      </if>
+      <if test="infoLevel != null">
+        #{infoLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.UserAdvice">
+    update TB_USER_ADVICE
+    <set>
+      <if test="advice != null">
+        ADVICE = #{advice,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="doStatus != null">
+        DO_STATUS = #{doStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="shenHeStatus != null">
+        SHEN_HE_STATUS = #{shenHeStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="contactWay != null">
+        CONTACT_WAY = #{contactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="isUpperTracker != null">
+        IS_UPPER_TRACKER = #{isUpperTracker,jdbcType=DECIMAL},
+      </if>
+      <if test="infoLevel != null">
+        INFO_LEVEL = #{infoLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.UserAdvice">
+    update TB_USER_ADVICE
+    set ADVICE = #{advice,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      DO_STATUS = #{doStatus,jdbcType=DECIMAL},
+      SHEN_HE_STATUS = #{shenHeStatus,jdbcType=DECIMAL},
+      CONTACT_WAY = #{contactWay,jdbcType=VARCHAR},
+      IS_UPPER_TRACKER = #{isUpperTracker,jdbcType=DECIMAL},
+      INFO_LEVEL = #{infoLevel,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

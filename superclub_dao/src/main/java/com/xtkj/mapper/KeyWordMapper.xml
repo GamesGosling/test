@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.KeyWordMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.KeyWord">
+    <id column="KEY_ID" jdbcType="VARCHAR" property="keyId" />
+    <result column="CONTEXT" jdbcType="VARCHAR" property="context" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    KEY_ID, CONTEXT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_KEY_WORD
+    where KEY_ID = #{keyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_KEY_WORD
+    where KEY_ID = #{keyId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.KeyWord">
+    insert into TB_KEY_WORD (KEY_ID, CONTEXT)
+    values (#{keyId,jdbcType=VARCHAR}, #{context,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.KeyWord">
+    insert into TB_KEY_WORD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="keyId != null">
+        KEY_ID,
+      </if>
+      <if test="context != null">
+        CONTEXT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="keyId != null">
+        #{keyId,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null">
+        #{context,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.KeyWord">
+    update TB_KEY_WORD
+    <set>
+      <if test="context != null">
+        CONTEXT = #{context,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where KEY_ID = #{keyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.KeyWord">
+    update TB_KEY_WORD
+    set CONTEXT = #{context,jdbcType=VARCHAR}
+    where KEY_ID = #{keyId,jdbcType=VARCHAR}
+  </update>
+</mapper>

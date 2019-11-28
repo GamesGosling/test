@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.xtkj</groupId>
+		<artifactId>superclub_manager</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../superclub_manager</relativePath>
+	</parent>
+	<artifactId>superclub_controller</artifactId>
+	<packaging>war</packaging>
+	<name>superclub_controller Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.xtkj</groupId>
+			<artifactId>superclub_service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.thetransactioncompany/cors-filter -->
+		<!-- 同源策略 -->
+		<dependency>
+			<groupId>com.thetransactioncompany</groupId>
+			<artifactId>cors-filter</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-all -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-all</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		
+		<!-- 富文本框 -->
+		<!-- <dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>ueditor</artifactId>
+			<version>1.4.3</version>
+		</dependency>-->
+		
+		<!-- <dependency>
+			<groupId>com.xtkj</groupId>
+			<artifactId>superclub_controller</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/static/plugins/ueditor/jsp/lib/commons-codec-1.9.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.xtkj</groupId>
+			<artifactId>superclub_controller</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/static/plugins/ueditor/jsp/lib/ueditor-1.1.2.jar</systemPath>
+		</dependency> -->
+		
+ 
+	</dependencies>
+
+	<build>
+		<finalName>superclub_controller</finalName>
+	</build>
+</project>

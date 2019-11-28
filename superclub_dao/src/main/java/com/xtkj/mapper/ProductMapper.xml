@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.Product">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="productName" />
+    <result column="PRODUCT_DESCRIPT" jdbcType="VARCHAR" property="productDescript" />
+    <result column="PRICE" jdbcType="FLOAT" property="price" />
+    <result column="IMG_URL" jdbcType="VARCHAR" property="imgUrl" />
+    <result column="PRODUCT_ISHOT" jdbcType="DECIMAL" property="productIshot" />
+    <result column="UPPER" jdbcType="DECIMAL" property="upper" />
+    <result column="LOOK_NUM" jdbcType="DECIMAL" property="lookNum" />
+    <result column="SELL_NUM" jdbcType="DECIMAL" property="sellNum" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, PRODUCT_NAME, PRODUCT_DESCRIPT, PRICE, IMG_URL, PRODUCT_ISHOT, UPPER, LOOK_NUM, 
+    SELL_NUM, UPDATE_TIME, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_PRODUCT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_PRODUCT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.Product">
+    insert into TB_PRODUCT (ID, PRODUCT_NAME, PRODUCT_DESCRIPT, 
+      PRICE, IMG_URL, PRODUCT_ISHOT, 
+      UPPER, LOOK_NUM, SELL_NUM, 
+      UPDATE_TIME, CREATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{productDescript,jdbcType=VARCHAR}, 
+      #{price,jdbcType=FLOAT}, #{imgUrl,jdbcType=VARCHAR}, #{productIshot,jdbcType=DECIMAL}, 
+      #{upper,jdbcType=DECIMAL}, #{lookNum,jdbcType=DECIMAL}, #{sellNum,jdbcType=DECIMAL}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.Product">
+    insert into TB_PRODUCT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="productName != null">
+        PRODUCT_NAME,
+      </if>
+      <if test="productDescript != null">
+        PRODUCT_DESCRIPT,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="imgUrl != null">
+        IMG_URL,
+      </if>
+      <if test="productIshot != null">
+        PRODUCT_ISHOT,
+      </if>
+      <if test="upper != null">
+        UPPER,
+      </if>
+      <if test="lookNum != null">
+        LOOK_NUM,
+      </if>
+      <if test="sellNum != null">
+        SELL_NUM,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productDescript != null">
+        #{productDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=FLOAT},
+      </if>
+      <if test="imgUrl != null">
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="productIshot != null">
+        #{productIshot,jdbcType=DECIMAL},
+      </if>
+      <if test="upper != null">
+        #{upper,jdbcType=DECIMAL},
+      </if>
+      <if test="lookNum != null">
+        #{lookNum,jdbcType=DECIMAL},
+      </if>
+      <if test="sellNum != null">
+        #{sellNum,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.Product">
+    update TB_PRODUCT
+    <set>
+      <if test="productName != null">
+        PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productDescript != null">
+        PRODUCT_DESCRIPT = #{productDescript,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=FLOAT},
+      </if>
+      <if test="imgUrl != null">
+        IMG_URL = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="productIshot != null">
+        PRODUCT_ISHOT = #{productIshot,jdbcType=DECIMAL},
+      </if>
+      <if test="upper != null">
+        UPPER = #{upper,jdbcType=DECIMAL},
+      </if>
+      <if test="lookNum != null">
+        LOOK_NUM = #{lookNum,jdbcType=DECIMAL},
+      </if>
+      <if test="sellNum != null">
+        SELL_NUM = #{sellNum,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.Product">
+    update TB_PRODUCT
+    set PRODUCT_NAME = #{productName,jdbcType=VARCHAR},
+      PRODUCT_DESCRIPT = #{productDescript,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=FLOAT},
+      IMG_URL = #{imgUrl,jdbcType=VARCHAR},
+      PRODUCT_ISHOT = #{productIshot,jdbcType=DECIMAL},
+      UPPER = #{upper,jdbcType=DECIMAL},
+      LOOK_NUM = #{lookNum,jdbcType=DECIMAL},
+      SELL_NUM = #{sellNum,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectProducts" resultMap="BaseResultMap">
+   	select 
+    <include refid="Base_Column_List" />
+    from TB_PRODUCT
+    where UPPER !=0 order by PRODUCT_ISHOT DESC
+  </select>
+</mapper>

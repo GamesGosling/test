@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.SpecialMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.Special">
+    <result column="SPECIAL_ID" jdbcType="VARCHAR" property="specialId" />
+    <result column="SPECIAL_TYPE" jdbcType="VARCHAR" property="specialType" />
+    <result column="SPECIAL_SUMMARY" jdbcType="VARCHAR" property="specialSummary" />
+    <result column="SPECIAL_TITLE" jdbcType="VARCHAR" property="specialTitle" />
+    <result column="SPECIAL_CONTEXT" jdbcType="VARCHAR" property="specialContext" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="PHOTO_ALBUM_ID" jdbcType="VARCHAR" property="photoAlbumId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.xtkj.pojo.Special">
+    insert into TB_SPECIAL (SPECIAL_ID, SPECIAL_TYPE, SPECIAL_SUMMARY, 
+      SPECIAL_TITLE, SPECIAL_CONTEXT, CREATE_TIME, 
+      UPDATE_TIME, PHOTO_ALBUM_ID)
+    values (#{specialId,jdbcType=VARCHAR}, #{specialType,jdbcType=VARCHAR}, #{specialSummary,jdbcType=VARCHAR}, 
+      #{specialTitle,jdbcType=VARCHAR}, #{specialContext,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{photoAlbumId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.Special">
+    insert into TB_SPECIAL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="specialId != null">
+        SPECIAL_ID,
+      </if>
+      <if test="specialType != null">
+        SPECIAL_TYPE,
+      </if>
+      <if test="specialSummary != null">
+        SPECIAL_SUMMARY,
+      </if>
+      <if test="specialTitle != null">
+        SPECIAL_TITLE,
+      </if>
+      <if test="specialContext != null">
+        SPECIAL_CONTEXT,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="photoAlbumId != null">
+        PHOTO_ALBUM_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="specialId != null">
+        #{specialId,jdbcType=VARCHAR},
+      </if>
+      <if test="specialType != null">
+        #{specialType,jdbcType=VARCHAR},
+      </if>
+      <if test="specialSummary != null">
+        #{specialSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="specialTitle != null">
+        #{specialTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="specialContext != null">
+        #{specialContext,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="photoAlbumId != null">
+        #{photoAlbumId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

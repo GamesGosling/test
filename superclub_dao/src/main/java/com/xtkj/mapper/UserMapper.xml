@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.User">
+    <id column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="PERSONAL_ALBUM_ID" jdbcType="VARCHAR" property="personalAlbumId" />
+    <result column="NICK_NAME" jdbcType="VARCHAR" property="nickName" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone" />
+    <result column="CREATDTM" jdbcType="TIMESTAMP" property="creatdtm" />
+    <result column="ISLIMIT" jdbcType="DECIMAL" property="islimit" />
+    <result column="HEAD_PORTRAIT" jdbcType="VARCHAR" property="headPortrait" />
+    <result column="AGE" jdbcType="DECIMAL" property="age" />
+    <result column="PERSONALIZED_SIGNATURE" jdbcType="VARCHAR" property="personalizedSignature" />
+    <result column="HOBBY" jdbcType="VARCHAR" property="hobby" />
+    <result column="POST" jdbcType="VARCHAR" property="post" />
+    <result column="HOMETOWN" jdbcType="VARCHAR" property="hometown" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="INTEGRAL" jdbcType="DECIMAL" property="integral" />
+    <result column="UPDATEDTM" jdbcType="VARCHAR" property="updatedtm" />
+    <result column="USER_PASSWORD" jdbcType="VARCHAR" property="userPassword" />
+    <result column="SOLEMELBER" jdbcType="VARCHAR" property="solemelber" />
+    <result column="CREATEDTM" jdbcType="TIMESTAMP" property="createdtm" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USER_ID, PERSONAL_ALBUM_ID, NICK_NAME, SEX, TELEPHONE, CREATDTM, ISLIMIT, HEAD_PORTRAIT, 
+    AGE, PERSONALIZED_SIGNATURE, HOBBY, POST, HOMETOWN, CITY, EMAIL, INTEGRAL, UPDATEDTM, 
+    USER_PASSWORD, SOLEMELBER, CREATEDTM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_USER
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_USER
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.User">
+    insert into TB_USER (USER_ID, PERSONAL_ALBUM_ID, NICK_NAME, 
+      SEX, TELEPHONE, CREATDTM, 
+      ISLIMIT, HEAD_PORTRAIT, AGE, 
+      PERSONALIZED_SIGNATURE, HOBBY, POST, 
+      HOMETOWN, CITY, EMAIL, 
+      INTEGRAL, UPDATEDTM, USER_PASSWORD, 
+      SOLEMELBER, CREATEDTM)
+    values (#{userId,jdbcType=VARCHAR}, #{personalAlbumId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, sysdate, 
+      #{islimit,jdbcType=DECIMAL}, #{headPortrait,jdbcType=VARCHAR}, #{age,jdbcType=DECIMAL}, 
+      #{personalizedSignature,jdbcType=VARCHAR}, #{hobby,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR}, 
+      #{hometown,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{integral,jdbcType=DECIMAL}, sysdate, #{userPassword,jdbcType=VARCHAR}, 
+      #{solemelber,jdbcType=VARCHAR}, sysdate)
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.User">
+    insert into TB_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="personalAlbumId != null">
+        PERSONAL_ALBUM_ID,
+      </if>
+      <if test="nickName != null">
+        NICK_NAME,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="telephone != null">
+        TELEPHONE,
+      </if>
+      <if test="creatdtm != null">
+        CREATDTM,
+      </if>
+      <if test="islimit != null">
+        ISLIMIT,
+      </if>
+      <if test="headPortrait != null">
+        HEAD_PORTRAIT,
+      </if>
+      <if test="age != null">
+        AGE,
+      </if>
+      <if test="personalizedSignature != null">
+        PERSONALIZED_SIGNATURE,
+      </if>
+      <if test="hobby != null">
+        HOBBY,
+      </if>
+      <if test="post != null">
+        POST,
+      </if>
+      <if test="hometown != null">
+        HOMETOWN,
+      </if>
+      <if test="city != null">
+        CITY,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="integral != null">
+        INTEGRAL,
+      </if>
+      <if test="updatedtm != null">
+        UPDATEDTM,
+      </if>
+      <if test="userPassword != null">
+        USER_PASSWORD,
+      </if>
+      <if test="solemelber != null">
+        SOLEMELBER,
+      </if>
+      <if test="createdtm != null">
+        CREATEDTM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="personalAlbumId != null">
+        #{personalAlbumId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="creatdtm != null">
+        #{creatdtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="islimit != null">
+        #{islimit,jdbcType=DECIMAL},
+      </if>
+      <if test="headPortrait != null">
+        #{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=DECIMAL},
+      </if>
+      <if test="personalizedSignature != null">
+        #{personalizedSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null">
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null">
+        #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="hometown != null">
+        #{hometown,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null">
+        #{integral,jdbcType=DECIMAL},
+      </if>
+      <if test="updatedtm != null">
+        #{updatedtm,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="solemelber != null">
+        #{solemelber,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtm != null">
+        #{createdtm,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.User">
+    update TB_USER
+    <set>
+      <if test="personalAlbumId != null">
+        PERSONAL_ALBUM_ID = #{personalAlbumId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="creatdtm != null">
+        CREATDTM = sysdate,
+      </if>
+      <if test="islimit != null">
+        ISLIMIT = #{islimit,jdbcType=DECIMAL},
+      </if>
+      <if test="headPortrait != null">
+        HEAD_PORTRAIT = #{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        AGE = #{age,jdbcType=DECIMAL},
+      </if>
+      <if test="personalizedSignature != null">
+        PERSONALIZED_SIGNATURE = #{personalizedSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="hobby != null">
+        HOBBY = #{hobby,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null">
+        POST = #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="hometown != null">
+        HOMETOWN = #{hometown,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null">
+        INTEGRAL = #{integral,jdbcType=DECIMAL},
+      </if>
+      <if test="updatedtm != null">
+        UPDATEDTM = sysdate,
+      </if>
+      <if test="userPassword != null">
+        USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="solemelber != null">
+        SOLEMELBER = #{solemelber,jdbcType=VARCHAR},
+      </if>
+      <if test="createdtm != null">
+        CREATEDTM = sysdate,
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.User">
+    update TB_USER
+    set PERSONAL_ALBUM_ID = #{personalAlbumId,jdbcType=VARCHAR},
+      NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      CREATDTM = #{creatdtm,jdbcType=TIMESTAMP},
+      ISLIMIT = #{islimit,jdbcType=DECIMAL},
+      HEAD_PORTRAIT = #{headPortrait,jdbcType=VARCHAR},
+      AGE = #{age,jdbcType=DECIMAL},
+      PERSONALIZED_SIGNATURE = #{personalizedSignature,jdbcType=VARCHAR},
+      HOBBY = #{hobby,jdbcType=VARCHAR},
+      POST = #{post,jdbcType=VARCHAR},
+      HOMETOWN = #{hometown,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      INTEGRAL = #{integral,jdbcType=DECIMAL},
+      UPDATEDTM = #{updatedtm,jdbcType=VARCHAR},
+      USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+      SOLEMELBER = #{solemelber,jdbcType=VARCHAR},
+      CREATEDTM = #{createdtm,jdbcType=TIMESTAMP}
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

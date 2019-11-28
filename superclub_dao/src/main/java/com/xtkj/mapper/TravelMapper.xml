@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.TravelMapper">
+	<resultMap id="BaseResultMap" type="com.xtkj.pojo.Travel">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<!-- <result column="USER_ID" jdbcType="VARCHAR" property="userId" /> -->
+		<result column="PUBLISH_TIME" jdbcType="TIMESTAMP"
+			property="publishTime" />
+		<result column="TRAVEL_CONTEXT" jdbcType="VARCHAR"
+			property="travelContext" />
+		<result column="TRAVEL_LIKE" jdbcType="DECIMAL"
+			property="travelLike" />
+		<result column="LOCATION" jdbcType="VARCHAR"
+			property="location" />
+		<result column="CHANNEL" jdbcType="VARCHAR" property="channel" />
+		<result column="IP" jdbcType="VARCHAR" property="ip" />
+		<result column="READ_NUM" jdbcType="DECIMAL" property="readNum" />
+		<result column="OK" jdbcType="DECIMAL" property="ok" />
+		<result column="UPDATE_TIME" jdbcType="TIMESTAMP"
+			property="updateTime" />
+		<result column="CREATE_TIME" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<result column="TRAVEL_TITLED" jdbcType="VARCHAR"
+			property="travelTitled" />
+		<result column="PHOTO_ALBUM_ID" jdbcType="VARCHAR"
+			property="photoAlbumId" />
+	</resultMap>
+
+	<resultMap  id="BaseResultHasUser" type="com.xtkj.pojo.Travel" 
+		extends="BaseResultMap">
+		<association property="user" column="user_id" fetchType="lazy"
+			resultMap="com.xtkj.dao.UserMapper.BaseResultMap">
+		</association>
+	</resultMap>
+
+
+
+	<sql id="Base_Column_List">
+		ID, USER_ID, PUBLISH_TIME, TRAVEL_CONTEXT, TRAVEL_LIKE, LOCATION,
+		CHANNEL, IP, READ_NUM,
+		OK, UPDATE_TIME, CREATE_TIME, TRAVEL_TITLED, PHOTO_ALBUM_ID
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="com.xtkj.pojo.TravelKey" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from TB_TRAVEL
+		where ID = #{id,jdbcType=VARCHAR}
+		and USER_ID = #{userId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="com.xtkj.pojo.TravelKey">
+		delete from TB_TRAVEL
+		where ID = #{id,jdbcType=VARCHAR}
+		and USER_ID = #{userId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.xtkj.pojo.Travel">
+		insert into TB_TRAVEL (ID, USER_ID, PUBLISH_TIME,
+		TRAVEL_CONTEXT, TRAVEL_LIKE, LOCATION,
+		CHANNEL, IP, READ_NUM,
+		OK, UPDATE_TIME, CREATE_TIME,
+		TRAVEL_TITLED, PHOTO_ALBUM_ID)
+		values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+		#{publishTime,jdbcType=TIMESTAMP},
+		#{travelContext,jdbcType=VARCHAR}, #{travelLike,jdbcType=DECIMAL}, #{location,jdbcType=VARCHAR},
+		#{channel,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
+		#{readNum,jdbcType=DECIMAL},
+		#{ok,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP},
+		#{travelTitled,jdbcType=VARCHAR}, #{photoAlbumId,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.xtkj.pojo.Travel">
+		insert into TB_TRAVEL
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="publishTime != null">
+				PUBLISH_TIME,
+			</if>
+			<if test="travelContext != null">
+				TRAVEL_CONTEXT,
+			</if>
+			<if test="travelLike != null">
+				TRAVEL_LIKE,
+			</if>
+			<if test="location != null">
+				LOCATION,
+			</if>
+			<if test="channel != null">
+				CHANNEL,
+			</if>
+			<if test="ip != null">
+				IP,
+			</if>
+			<if test="readNum != null">
+				READ_NUM,
+			</if>
+			<if test="ok != null">
+				OK,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+			<if test="travelTitled != null">
+				TRAVEL_TITLED,
+			</if>
+			<if test="photoAlbumId != null">
+				PHOTO_ALBUM_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="publishTime != null">
+				#{publishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="travelContext != null">
+				#{travelContext,jdbcType=VARCHAR},
+			</if>
+			<if test="travelLike != null">
+				#{travelLike,jdbcType=DECIMAL},
+			</if>
+			<if test="location != null">
+				#{location,jdbcType=VARCHAR},
+			</if>
+			<if test="channel != null">
+				#{channel,jdbcType=VARCHAR},
+			</if>
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="readNum != null">
+				#{readNum,jdbcType=DECIMAL},
+			</if>
+			<if test="ok != null">
+				#{ok,jdbcType=DECIMAL},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="travelTitled != null">
+				#{travelTitled,jdbcType=VARCHAR},
+			</if>
+			<if test="photoAlbumId != null">
+				#{photoAlbumId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.xtkj.pojo.Travel">
+		update TB_TRAVEL
+		<set>
+			<if test="publishTime != null">
+				PUBLISH_TIME = #{publishTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="travelContext != null">
+				TRAVEL_CONTEXT = #{travelContext,jdbcType=VARCHAR},
+			</if>
+			<if test="travelLike != null">
+				TRAVEL_LIKE = #{travelLike,jdbcType=DECIMAL},
+			</if>
+			<if test="location != null">
+				LOCATION = #{location,jdbcType=VARCHAR},
+			</if>
+			<if test="channel != null">
+				CHANNEL = #{channel,jdbcType=VARCHAR},
+			</if>
+			<if test="ip != null">
+				IP = #{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="readNum != null">
+				READ_NUM = #{readNum,jdbcType=DECIMAL},
+			</if>
+			<if test="ok != null">
+				OK = #{ok,jdbcType=DECIMAL},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="travelTitled != null">
+				TRAVEL_TITLED = #{travelTitled,jdbcType=VARCHAR},
+			</if>
+			<if test="photoAlbumId != null">
+				PHOTO_ALBUM_ID = #{photoAlbumId,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+		and USER_ID = #{userId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.xtkj.pojo.Travel">
+		update TB_TRAVEL
+		set PUBLISH_TIME = #{publishTime,jdbcType=TIMESTAMP},
+		TRAVEL_CONTEXT = #{travelContext,jdbcType=VARCHAR},
+		TRAVEL_LIKE = #{travelLike,jdbcType=DECIMAL},
+		LOCATION = #{location,jdbcType=VARCHAR},
+		CHANNEL = #{channel,jdbcType=VARCHAR},
+		IP = #{ip,jdbcType=VARCHAR},
+		READ_NUM = #{readNum,jdbcType=DECIMAL},
+		OK = #{ok,jdbcType=DECIMAL},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		TRAVEL_TITLED = #{travelTitled,jdbcType=VARCHAR},
+		PHOTO_ALBUM_ID = #{photoAlbumId,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=VARCHAR}
+		and USER_ID = #{userId,jdbcType=VARCHAR}
+	</update>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.LoginHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.LoginHistory">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="LOGIN_TYPE" jdbcType="VARCHAR" property="loginType" />
+    <result column="IEMI" jdbcType="VARCHAR" property="iemi" />
+    <result column="IP" jdbcType="VARCHAR" property="ip" />
+    <result column="LOGIN_ADDRESS" jdbcType="VARCHAR" property="loginAddress" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="LOGIN_TIME" jdbcType="TIMESTAMP" property="loginTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_ID, LOGIN_TYPE, IEMI, IP, LOGIN_ADDRESS, UPDATE_TIME, LOGIN_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_LOGIIN_HISTORY
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_LOGIIN_HISTORY
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.LoginHistory">
+    insert into TB_LOGIIN_HISTORY (ID, USER_ID, LOGIN_TYPE, 
+      IEMI, IP, LOGIN_ADDRESS, 
+      UPDATE_TIME, LOGIN_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{loginType,jdbcType=VARCHAR}, 
+      #{iemi,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{loginAddress,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{loginTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.LoginHistory">
+    insert into TB_LOGIIN_HISTORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="loginType != null">
+        LOGIN_TYPE,
+      </if>
+      <if test="iemi != null">
+        IEMI,
+      </if>
+      <if test="ip != null">
+        IP,
+      </if>
+      <if test="loginAddress != null">
+        LOGIN_ADDRESS,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="loginTime != null">
+        LOGIN_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginType != null">
+        #{loginType,jdbcType=VARCHAR},
+      </if>
+      <if test="iemi != null">
+        #{iemi,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="loginAddress != null">
+        #{loginAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginTime != null">
+        #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.LoginHistory">
+    update TB_LOGIIN_HISTORY
+    <set>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginType != null">
+        LOGIN_TYPE = #{loginType,jdbcType=VARCHAR},
+      </if>
+      <if test="iemi != null">
+        IEMI = #{iemi,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="loginAddress != null">
+        LOGIN_ADDRESS = #{loginAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginTime != null">
+        LOGIN_TIME = #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.LoginHistory">
+    update TB_LOGIIN_HISTORY
+    set USER_ID = #{userId,jdbcType=VARCHAR},
+      LOGIN_TYPE = #{loginType,jdbcType=VARCHAR},
+      IEMI = #{iemi,jdbcType=VARCHAR},
+      IP = #{ip,jdbcType=VARCHAR},
+      LOGIN_ADDRESS = #{loginAddress,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      LOGIN_TIME = #{loginTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

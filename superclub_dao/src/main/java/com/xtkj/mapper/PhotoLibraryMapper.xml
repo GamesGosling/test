@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.PhotoLibraryMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.PhotoLibrary">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="PHOTO_URL" jdbcType="VARCHAR" property="photoUrl" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="OK" jdbcType="DECIMAL" property="ok" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="ALBUM_ID" jdbcType="VARCHAR" property="albumId" />
+    <result column="ACTIVITY_ID" jdbcType="VARCHAR" property="activityId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, PHOTO_URL, USER_ID, OK, UPDATE_TIME, CREATE_TIME, ALBUM_ID, ACTIVITY_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_PHOTO_LIBRARY
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_PHOTO_LIBRARY
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.PhotoLibrary">
+    insert into TB_PHOTO_LIBRARY (ID, PHOTO_URL, USER_ID, 
+      OK, UPDATE_TIME, CREATE_TIME, 
+      ALBUM_ID, ACTIVITY_ID)
+    values (#{id,jdbcType=VARCHAR}, #{photoUrl,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{ok,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{albumId,jdbcType=VARCHAR}, #{activityId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.PhotoLibrary">
+    insert into TB_PHOTO_LIBRARY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="photoUrl != null">
+        PHOTO_URL,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="ok != null">
+        OK,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="albumId != null">
+        ALBUM_ID,
+      </if>
+      <if test="activityId != null">
+        ACTIVITY_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="photoUrl != null">
+        #{photoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="ok != null">
+        #{ok,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="albumId != null">
+        #{albumId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityId != null">
+        #{activityId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.PhotoLibrary">
+    update TB_PHOTO_LIBRARY
+    <set>
+      <if test="photoUrl != null">
+        PHOTO_URL = #{photoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="ok != null">
+        OK = #{ok,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="albumId != null">
+        ALBUM_ID = #{albumId,jdbcType=VARCHAR},
+      </if>
+      <if test="activityId != null">
+        ACTIVITY_ID = #{activityId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.PhotoLibrary">
+    update TB_PHOTO_LIBRARY
+    set PHOTO_URL = #{photoUrl,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      OK = #{ok,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      ALBUM_ID = #{albumId,jdbcType=VARCHAR},
+      ACTIVITY_ID = #{activityId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <delete id="deleteByAlbumId" parameterType="java.lang.String">
+    delete from TB_PHOTO_LIBRARY
+    where ALBUM_ID = #{albumId,jdbcType=VARCHAR}
+  </delete>
+  <select id="selectPhotoByAlbumId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_PHOTO_LIBRARY
+    where ALBUM_ID = #{albumId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAlbumPhotoCnt" parameterType="java.lang.String" resultType="int">
+   	select count(*)
+    from TB_PHOTO_LIBRARY
+    where ALBUM_ID = #{albumId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectTimeByAlbumId" parameterType="java.lang.String" resultType="string">
+   	select DISTINCT TO_CHAR(CREATE_TIME,'yyyy-MM-dd')
+   	from TB_PHOTO_LIBRARY
+    where ALBUM_ID = #{albumId,jdbcType=VARCHAR}
+    order by TO_CHAR(CREATE_TIME,'yyyy-MM-dd') DESC
+  </select>
+</mapper>

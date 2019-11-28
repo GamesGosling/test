@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.TourTeamMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.TourTeam">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="TEAM_ID" jdbcType="VARCHAR" property="teamId" />
+    <result column="LEADER_ID" jdbcType="VARCHAR" property="leaderId" />
+    <result column="TEAM_LOGO" jdbcType="VARCHAR" property="teamLogo" />
+    <result column="LOCALTION" jdbcType="VARCHAR" property="localtion" />
+    <result column="MAIN_PROJECT" jdbcType="VARCHAR" property="mainProject" />
+    <result column="INTRO" jdbcType="VARCHAR" property="intro" />
+    <result column="MANIFESTO" jdbcType="VARCHAR" property="manifesto" />
+    <result column="PRINCIPAL_NAME" jdbcType="VARCHAR" property="principalName" />
+    <result column="PRINCIPAL_TELPHONE" jdbcType="VARCHAR" property="principalTelphone" />
+    <result column="PHOTO_ALBUM_ID" jdbcType="VARCHAR" property="photoAlbumId" />
+    <result column="TOUR_ID" jdbcType="VARCHAR" property="tourId" />
+    <result column="UPDATE_TIME" jdbcType="VARCHAR" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
+    <result column="TEAM_NAME" jdbcType="VARCHAR" property="teamName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, TEAM_ID, LEADER_ID, TEAM_LOGO, LOCALTION, MAIN_PROJECT, INTRO, MANIFESTO, PRINCIPAL_NAME, 
+    PRINCIPAL_TELPHONE, PHOTO_ALBUM_ID, TOUR_ID, UPDATE_TIME, CREATE_TIME, TEAM_NAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_TOUR_TEAM
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_TOUR_TEAM
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.TourTeam">
+    insert into TB_TOUR_TEAM (ID, TEAM_ID, LEADER_ID, 
+      TEAM_LOGO, LOCALTION, MAIN_PROJECT, 
+      INTRO, MANIFESTO, PRINCIPAL_NAME, 
+      PRINCIPAL_TELPHONE, PHOTO_ALBUM_ID, TOUR_ID, 
+      UPDATE_TIME, CREATE_TIME, TEAM_NAME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{teamId,jdbcType=VARCHAR}, #{leaderId,jdbcType=VARCHAR}, 
+      #{teamLogo,jdbcType=VARCHAR}, #{localtion,jdbcType=VARCHAR}, #{mainProject,jdbcType=VARCHAR}, 
+      #{intro,jdbcType=VARCHAR}, #{manifesto,jdbcType=VARCHAR}, #{principalName,jdbcType=VARCHAR}, 
+      #{principalTelphone,jdbcType=VARCHAR}, #{photoAlbumId,jdbcType=VARCHAR}, #{tourId,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{teamName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.TourTeam">
+    insert into TB_TOUR_TEAM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="teamId != null">
+        TEAM_ID,
+      </if>
+      <if test="leaderId != null">
+        LEADER_ID,
+      </if>
+      <if test="teamLogo != null">
+        TEAM_LOGO,
+      </if>
+      <if test="localtion != null">
+        LOCALTION,
+      </if>
+      <if test="mainProject != null">
+        MAIN_PROJECT,
+      </if>
+      <if test="intro != null">
+        INTRO,
+      </if>
+      <if test="manifesto != null">
+        MANIFESTO,
+      </if>
+      <if test="principalName != null">
+        PRINCIPAL_NAME,
+      </if>
+      <if test="principalTelphone != null">
+        PRINCIPAL_TELPHONE,
+      </if>
+      <if test="photoAlbumId != null">
+        PHOTO_ALBUM_ID,
+      </if>
+      <if test="tourId != null">
+        TOUR_ID,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="teamName != null">
+        TEAM_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="teamId != null">
+        #{teamId,jdbcType=VARCHAR},
+      </if>
+      <if test="leaderId != null">
+        #{leaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="teamLogo != null">
+        #{teamLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="localtion != null">
+        #{localtion,jdbcType=VARCHAR},
+      </if>
+      <if test="mainProject != null">
+        #{mainProject,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="manifesto != null">
+        #{manifesto,jdbcType=VARCHAR},
+      </if>
+      <if test="principalName != null">
+        #{principalName,jdbcType=VARCHAR},
+      </if>
+      <if test="principalTelphone != null">
+        #{principalTelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="photoAlbumId != null">
+        #{photoAlbumId,jdbcType=VARCHAR},
+      </if>
+      <if test="tourId != null">
+        #{tourId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="teamName != null">
+        #{teamName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.TourTeam">
+    update TB_TOUR_TEAM
+    <set>
+      <if test="teamId != null">
+        TEAM_ID = #{teamId,jdbcType=VARCHAR},
+      </if>
+      <if test="leaderId != null">
+        LEADER_ID = #{leaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="teamLogo != null">
+        TEAM_LOGO = #{teamLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="localtion != null">
+        LOCALTION = #{localtion,jdbcType=VARCHAR},
+      </if>
+      <if test="mainProject != null">
+        MAIN_PROJECT = #{mainProject,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        INTRO = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="manifesto != null">
+        MANIFESTO = #{manifesto,jdbcType=VARCHAR},
+      </if>
+      <if test="principalName != null">
+        PRINCIPAL_NAME = #{principalName,jdbcType=VARCHAR},
+      </if>
+      <if test="principalTelphone != null">
+        PRINCIPAL_TELPHONE = #{principalTelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="photoAlbumId != null">
+        PHOTO_ALBUM_ID = #{photoAlbumId,jdbcType=VARCHAR},
+      </if>
+      <if test="tourId != null">
+        TOUR_ID = #{tourId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="teamName != null">
+        TEAM_NAME = #{teamName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.TourTeam">
+    update TB_TOUR_TEAM
+    set TEAM_ID = #{teamId,jdbcType=VARCHAR},
+      LEADER_ID = #{leaderId,jdbcType=VARCHAR},
+      TEAM_LOGO = #{teamLogo,jdbcType=VARCHAR},
+      LOCALTION = #{localtion,jdbcType=VARCHAR},
+      MAIN_PROJECT = #{mainProject,jdbcType=VARCHAR},
+      INTRO = #{intro,jdbcType=VARCHAR},
+      MANIFESTO = #{manifesto,jdbcType=VARCHAR},
+      PRINCIPAL_NAME = #{principalName,jdbcType=VARCHAR},
+      PRINCIPAL_TELPHONE = #{principalTelphone,jdbcType=VARCHAR},
+      PHOTO_ALBUM_ID = #{photoAlbumId,jdbcType=VARCHAR},
+      TOUR_ID = #{tourId,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      TEAM_NAME = #{teamName,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

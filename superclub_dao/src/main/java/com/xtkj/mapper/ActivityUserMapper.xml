@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.ActivityUserMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.ActivityUser">
+    <id column="ACTIVITY_ID" jdbcType="VARCHAR" property="activityId" />
+    <id column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ACTIVITY_ID, USER_ID, UPDATE_TIME, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.xtkj.pojo.ActivityUserKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_ACTIVITY_USER
+    where ACTIVITY_ID = #{activityId,jdbcType=VARCHAR}
+      and USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.xtkj.pojo.ActivityUserKey">
+    delete from TB_ACTIVITY_USER
+    where ACTIVITY_ID = #{activityId,jdbcType=VARCHAR}
+      and USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.ActivityUser">
+    insert into TB_ACTIVITY_USER (ACTIVITY_ID, USER_ID, UPDATE_TIME, 
+      CREATE_TIME)
+    values (#{activityId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.ActivityUser">
+    insert into TB_ACTIVITY_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        ACTIVITY_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        #{activityId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.ActivityUser">
+    update TB_ACTIVITY_USER
+    <set>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ACTIVITY_ID = #{activityId,jdbcType=VARCHAR}
+      and USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.ActivityUser">
+    update TB_ACTIVITY_USER
+    set UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ACTIVITY_ID = #{activityId,jdbcType=VARCHAR}
+      and USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByActivityId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_ACTIVITY_USER
+    where ACTIVITY_ID = #{activityId}
+  </select>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.NewInforMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.NewInfor">
+    <id column="INFOR_ID" jdbcType="VARCHAR" property="inforId" />
+    <result column="INFOR_TITLE" jdbcType="VARCHAR" property="inforTitle" />
+    <result column="INFOR_CONTEXT" jdbcType="VARCHAR" property="inforContext" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="PHOTO_ALBUM_ID" jdbcType="VARCHAR" property="photoAlbumId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    INFOR_ID, INFOR_TITLE, INFOR_CONTEXT, CREATE_TIME, UPDATE_TIME, PHOTO_ALBUM_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_NEW_INFOR
+    where INFOR_ID = #{inforId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_NEW_INFOR
+    where INFOR_ID = #{inforId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.NewInfor">
+    insert into TB_NEW_INFOR (INFOR_ID, INFOR_TITLE, INFOR_CONTEXT, 
+      CREATE_TIME, UPDATE_TIME, PHOTO_ALBUM_ID
+      )
+    values (#{inforId,jdbcType=VARCHAR}, #{inforTitle,jdbcType=VARCHAR}, #{inforContext,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{photoAlbumId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.NewInfor">
+    insert into TB_NEW_INFOR
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="inforId != null">
+        INFOR_ID,
+      </if>
+      <if test="inforTitle != null">
+        INFOR_TITLE,
+      </if>
+      <if test="inforContext != null">
+        INFOR_CONTEXT,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="photoAlbumId != null">
+        PHOTO_ALBUM_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="inforId != null">
+        #{inforId,jdbcType=VARCHAR},
+      </if>
+      <if test="inforTitle != null">
+        #{inforTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="inforContext != null">
+        #{inforContext,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="photoAlbumId != null">
+        #{photoAlbumId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.NewInfor">
+    update TB_NEW_INFOR
+    <set>
+      <if test="inforTitle != null">
+        INFOR_TITLE = #{inforTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="inforContext != null">
+        INFOR_CONTEXT = #{inforContext,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="photoAlbumId != null">
+        PHOTO_ALBUM_ID = #{photoAlbumId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where INFOR_ID = #{inforId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.NewInfor">
+    update TB_NEW_INFOR
+    set INFOR_TITLE = #{inforTitle,jdbcType=VARCHAR},
+      INFOR_CONTEXT = #{inforContext,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      PHOTO_ALBUM_ID = #{photoAlbumId,jdbcType=VARCHAR}
+    where INFOR_ID = #{inforId,jdbcType=VARCHAR}
+  </update>
+</mapper>

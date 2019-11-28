@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.ActivityMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.Activity">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="ISSUE_TYPE" jdbcType="VARCHAR" property="issueType" />
+    <result column="IEMI" jdbcType="VARCHAR" property="iemi" />
+    <result column="IP" jdbcType="VARCHAR" property="ip" />
+    <result column="ACTIVITY_LOCATION" jdbcType="VARCHAR" property="activityLocation" />
+    <result column="IS_CHARGE" jdbcType="DECIMAL" property="isCharge" />
+    <result column="INSURANCE_CHANNEL" jdbcType="VARCHAR" property="insuranceChannel" />
+    <result column="CHARGE_MODE" jdbcType="VARCHAR" property="chargeMode" />
+    <result column="ACTIVITY_DETAIL" jdbcType="VARCHAR" property="activityDetail" />
+    <result column="ACTIVITY_ISHOT" jdbcType="DECIMAL" property="activityIshot" />
+    <result column="ACTIVITY_END_TIME" jdbcType="TIMESTAMP" property="activityEndTime" />
+    <result column="ACTIVITY_BEGIN_TIME" jdbcType="TIMESTAMP" property="activityBeginTime" />
+    <result column="ACTIVITY_MAX_PEOPLE" jdbcType="DECIMAL" property="activityMaxPeople" />
+    <result column="ACTIVITY_VIEW_COUNT" jdbcType="DECIMAL" property="activityViewCount" />
+    <result column="OK" jdbcType="DECIMAL" property="ok" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="ACTIVITY_EXPIRED_TIME" jdbcType="TIMESTAMP" property="activityExpiredTime" />
+    <result column="CHARGE_MODECHARGE_MODE" jdbcType="VARCHAR" property="chargeModechargeMode" />
+    <result column="ACTIVITY_BEGIN_LOCATION" jdbcType="VARCHAR" property="activityBeginLocation" />
+    <result column="ACTIVITY_COVER" jdbcType="VARCHAR" property="activityCover" />
+    <result column="ACTIVITY_TITLE" jdbcType="VARCHAR" property="activityTitle" />
+  </resultMap>
+  
+  <resultMap id="ActivityHasActTypeAndUser" type="com.xtkj.pojo.Activity" extends="BaseResultMap">
+  	<association property="activityType" column="activity_type_id" resultMap="com.xtkj.dao.ActivityTypeMapper.BaseResultMap" fetchType="lazy"></association>
+  	<association property="user" column="user_id" resultMap="com.xtkj.dao.UserMapper.BaseResultMap" fetchType="lazy"></association>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    ID, ACTIVITY_TYPE_ID, USER_ID, ISSUE_TYPE, IEMI, IP, ACTIVITY_LOCATION, IS_CHARGE, 
+    INSURANCE_CHANNEL, CHARGE_MODE, ACTIVITY_DETAIL, ACTIVITY_ISHOT, ACTIVITY_END_TIME, 
+    ACTIVITY_BEGIN_TIME, ACTIVITY_MAX_PEOPLE, ACTIVITY_VIEW_COUNT, OK, UPDATE_TIME, CREATE_TIME, 
+    ACTIVITY_EXPIRED_TIME, CHARGE_MODECHARGE_MODE, ACTIVITY_BEGIN_LOCATION, ACTIVITY_COVER, 
+    ACTIVITY_TITLE
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ActivityHasActTypeAndUser">
+    select a.*,t.ACTIVITY_TYPE_NAME,u.NICK_NAME
+    from TB_ACTIVITY a,TB_ACTIVITY_TYPE t,TB_USER u where t.ACTIVITY_TYPE_ID=a.ACTIVITY_TYPE_ID and a.USER_ID=u.USER_ID
+   	and ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_ACTIVITY
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.Activity">
+    insert into TB_ACTIVITY (ID, ACTIVITY_TYPE_ID, USER_ID, 
+      ISSUE_TYPE, IEMI, IP, 
+      ACTIVITY_LOCATION, IS_CHARGE, INSURANCE_CHANNEL, 
+      CHARGE_MODE, ACTIVITY_DETAIL, ACTIVITY_ISHOT, 
+      ACTIVITY_END_TIME, ACTIVITY_BEGIN_TIME, 
+      ACTIVITY_MAX_PEOPLE, ACTIVITY_VIEW_COUNT, OK, 
+      UPDATE_TIME, CREATE_TIME, ACTIVITY_EXPIRED_TIME, 
+      CHARGE_MODECHARGE_MODE, ACTIVITY_BEGIN_LOCATION, 
+      ACTIVITY_COVER, ACTIVITY_TITLE)
+    values (#{id,jdbcType=VARCHAR}, #{activityType.activityTypeId,jdbcType=VARCHAR}, #{user.userId,jdbcType=VARCHAR}, 
+      #{issueType,jdbcType=VARCHAR}, #{iemi,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{activityLocation,jdbcType=VARCHAR}, #{isCharge,jdbcType=DECIMAL}, #{insuranceChannel,jdbcType=VARCHAR}, 
+      #{chargeMode,jdbcType=VARCHAR}, #{activityDetail,jdbcType=VARCHAR}, #{activityIshot,jdbcType=DECIMAL}, 
+      #{activityEndTime,jdbcType=TIMESTAMP}, #{activityBeginTime,jdbcType=TIMESTAMP}, 
+      #{activityMaxPeople,jdbcType=DECIMAL}, #{activityViewCount,jdbcType=DECIMAL}, #{ok,jdbcType=DECIMAL}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{activityExpiredTime,jdbcType=TIMESTAMP}, 
+      #{chargeModechargeMode,jdbcType=VARCHAR}, #{activityBeginLocation,jdbcType=VARCHAR}, 
+      #{activityCover,jdbcType=VARCHAR}, #{activityTitle,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.Activity">
+    insert into TB_ACTIVITY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="activityType != null">
+        ACTIVITY_TYPE_ID,
+      </if>
+      <if test="user != null">
+        USER_ID,
+      </if>
+      <if test="issueType != null">
+        ISSUE_TYPE,
+      </if>
+      <if test="iemi != null">
+        IEMI,
+      </if>
+      <if test="ip != null">
+        IP,
+      </if>
+      <if test="activityLocation != null">
+        ACTIVITY_LOCATION,
+      </if>
+      <if test="isCharge != null">
+        IS_CHARGE,
+      </if>
+      <if test="insuranceChannel != null">
+        INSURANCE_CHANNEL,
+      </if>
+      <if test="chargeMode != null">
+        CHARGE_MODE,
+      </if>
+      <if test="activityDetail != null">
+        ACTIVITY_DETAIL,
+      </if>
+      <if test="activityIshot != null">
+        ACTIVITY_ISHOT,
+      </if>
+      <if test="activityEndTime != null">
+        ACTIVITY_END_TIME,
+      </if>
+      <if test="activityBeginTime != null">
+        ACTIVITY_BEGIN_TIME,
+      </if>
+      <if test="activityMaxPeople != null">
+        ACTIVITY_MAX_PEOPLE,
+      </if>
+      <if test="activityViewCount != null">
+        ACTIVITY_VIEW_COUNT,
+      </if>
+      <if test="ok != null">
+        OK,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="activityExpiredTime != null">
+        ACTIVITY_EXPIRED_TIME,
+      </if>
+      <if test="chargeModechargeMode != null">
+        CHARGE_MODECHARGE_MODE,
+      </if>
+      <if test="activityBeginLocation != null">
+        ACTIVITY_BEGIN_LOCATION,
+      </if>
+      <if test="activityCover != null">
+        ACTIVITY_COVER,
+      </if>
+      <if test="activityTitle != null">
+        ACTIVITY_TITLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="activityType != null">
+        #{activityType.activityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null">
+        #{user.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="issueType != null">
+        #{issueType,jdbcType=VARCHAR},
+      </if>
+      <if test="iemi != null">
+        #{iemi,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="activityLocation != null">
+        #{activityLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="isCharge != null">
+        #{isCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="insuranceChannel != null">
+        #{insuranceChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeMode != null">
+        #{chargeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="activityDetail != null">
+        #{activityDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="activityIshot != null">
+        #{activityIshot,jdbcType=DECIMAL},
+      </if>
+      <if test="activityEndTime != null">
+        #{activityEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityBeginTime != null">
+        #{activityBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityMaxPeople != null">
+        #{activityMaxPeople,jdbcType=DECIMAL},
+      </if>
+      <if test="activityViewCount != null">
+        #{activityViewCount,jdbcType=DECIMAL},
+      </if>
+      <if test="ok != null">
+        #{ok,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityExpiredTime != null">
+        #{activityExpiredTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chargeModechargeMode != null">
+        #{chargeModechargeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="activityBeginLocation != null">
+        #{activityBeginLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="activityCover != null">
+        #{activityCover,jdbcType=VARCHAR},
+      </if>
+      <if test="activityTitle != null">
+        #{activityTitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.Activity">
+    update TB_ACTIVITY
+    <set>
+      <if test="activityType != null">
+        ACTIVITY_TYPE_ID = #{activityType.activityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null">
+        USER_ID = #{user.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="issueType != null">
+        ISSUE_TYPE = #{issueType,jdbcType=VARCHAR},
+      </if>
+      <if test="iemi != null">
+        IEMI = #{iemi,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        IP = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="activityLocation != null">
+        ACTIVITY_LOCATION = #{activityLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="isCharge != null">
+        IS_CHARGE = #{isCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="insuranceChannel != null">
+        INSURANCE_CHANNEL = #{insuranceChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="chargeMode != null">
+        CHARGE_MODE = #{chargeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="activityDetail != null">
+        ACTIVITY_DETAIL = #{activityDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="activityIshot != null">
+        ACTIVITY_ISHOT = #{activityIshot,jdbcType=DECIMAL},
+      </if>
+      <if test="activityEndTime != null">
+        ACTIVITY_END_TIME = #{activityEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityBeginTime != null">
+        ACTIVITY_BEGIN_TIME = #{activityBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityMaxPeople != null">
+        ACTIVITY_MAX_PEOPLE = #{activityMaxPeople,jdbcType=DECIMAL},
+      </if>
+      <if test="activityViewCount != null">
+        ACTIVITY_VIEW_COUNT = #{activityViewCount,jdbcType=DECIMAL},
+      </if>
+      <if test="ok != null">
+        OK = #{ok,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityExpiredTime != null">
+        ACTIVITY_EXPIRED_TIME = #{activityExpiredTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chargeModechargeMode != null">
+        CHARGE_MODECHARGE_MODE = #{chargeModechargeMode,jdbcType=VARCHAR},
+      </if>
+      <if test="activityBeginLocation != null">
+        ACTIVITY_BEGIN_LOCATION = #{activityBeginLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="activityCover != null">
+        ACTIVITY_COVER = #{activityCover,jdbcType=VARCHAR},
+      </if>
+      <if test="activityTitle != null">
+        ACTIVITY_TITLE = #{activityTitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.Activity">
+    update TB_ACTIVITY
+    set ACTIVITY_TYPE_ID = #{activityType.activityTypeId,jdbcType=VARCHAR},
+      USER_ID = #{user.userId,jdbcType=VARCHAR},
+      ISSUE_TYPE = #{issueType,jdbcType=VARCHAR},
+      IEMI = #{iemi,jdbcType=VARCHAR},
+      IP = #{ip,jdbcType=VARCHAR},
+      ACTIVITY_LOCATION = #{activityLocation,jdbcType=VARCHAR},
+      IS_CHARGE = #{isCharge,jdbcType=DECIMAL},
+      INSURANCE_CHANNEL = #{insuranceChannel,jdbcType=VARCHAR},
+      CHARGE_MODE = #{chargeMode,jdbcType=VARCHAR},
+      ACTIVITY_DETAIL = #{activityDetail,jdbcType=VARCHAR},
+      ACTIVITY_ISHOT = #{activityIshot,jdbcType=DECIMAL},
+      ACTIVITY_END_TIME = #{activityEndTime,jdbcType=TIMESTAMP},
+      ACTIVITY_BEGIN_TIME = #{activityBeginTime,jdbcType=TIMESTAMP},
+      ACTIVITY_MAX_PEOPLE = #{activityMaxPeople,jdbcType=DECIMAL},
+      ACTIVITY_VIEW_COUNT = #{activityViewCount,jdbcType=DECIMAL},
+      OK = #{ok,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      ACTIVITY_EXPIRED_TIME = #{activityExpiredTime,jdbcType=TIMESTAMP},
+      CHARGE_MODECHARGE_MODE = #{chargeModechargeMode,jdbcType=VARCHAR},
+      ACTIVITY_BEGIN_LOCATION = #{activityBeginLocation,jdbcType=VARCHAR},
+      ACTIVITY_COVER = #{activityCover,jdbcType=VARCHAR},
+      ACTIVITY_TITLE = #{activityTitle,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

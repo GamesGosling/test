@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.TravelCommontReplyMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.TravelCommontReply">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="COMMONT_ID" jdbcType="VARCHAR" property="commontId" />
+    <result column="REPLY_USER_ID" jdbcType="VARCHAR" property="replyUserId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="REPLY_CONTEXT" jdbcType="VARCHAR" property="replyContext" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="REPLY_USER_NAME" jdbcType="VARCHAR" property="replyUserName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, COMMONT_ID, REPLY_USER_ID, USER_ID, REPLY_CONTEXT, UPDATE_TIME, CREATE_TIME, 
+    USER_NAME, REPLY_USER_NAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_TRAVEL_COMMONT_REPLY
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_TRAVEL_COMMONT_REPLY
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.TravelCommontReply">
+    insert into TB_TRAVEL_COMMONT_REPLY (ID, COMMONT_ID, REPLY_USER_ID, 
+      USER_ID, REPLY_CONTEXT, UPDATE_TIME, 
+      CREATE_TIME, USER_NAME, REPLY_USER_NAME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{commontId,jdbcType=VARCHAR}, #{replyUserId,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{replyContext,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{userName,jdbcType=VARCHAR}, #{replyUserName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.TravelCommontReply">
+    insert into TB_TRAVEL_COMMONT_REPLY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="commontId != null">
+        COMMONT_ID,
+      </if>
+      <if test="replyUserId != null">
+        REPLY_USER_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="replyContext != null">
+        REPLY_CONTEXT,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="replyUserName != null">
+        REPLY_USER_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="commontId != null">
+        #{commontId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyUserId != null">
+        #{replyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyContext != null">
+        #{replyContext,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="replyUserName != null">
+        #{replyUserName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.TravelCommontReply">
+    update TB_TRAVEL_COMMONT_REPLY
+    <set>
+      <if test="commontId != null">
+        COMMONT_ID = #{commontId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyUserId != null">
+        REPLY_USER_ID = #{replyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyContext != null">
+        REPLY_CONTEXT = #{replyContext,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="replyUserName != null">
+        REPLY_USER_NAME = #{replyUserName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.TravelCommontReply">
+    update TB_TRAVEL_COMMONT_REPLY
+    set COMMONT_ID = #{commontId,jdbcType=VARCHAR},
+      REPLY_USER_ID = #{replyUserId,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      REPLY_CONTEXT = #{replyContext,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      REPLY_USER_NAME = #{replyUserName,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

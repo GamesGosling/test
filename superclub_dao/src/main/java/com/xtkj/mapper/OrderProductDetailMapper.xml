@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.OrderProductDetailMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.OrderProductDetail">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+    <result column="PRICE" jdbcType="FLOAT" property="price" />
+    <result column="NUM" jdbcType="DECIMAL" property="num" />
+    <result column="COLOR" jdbcType="VARCHAR" property="color" />
+    <result column="SIZEE" jdbcType="VARCHAR" property="sizee" />
+    <result column="MONEY" jdbcType="FLOAT" property="money" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ORDER_ID, PRODUCT_ID, PRICE, NUM, COLOR, SIZEE, MONEY, UPDATE_TIME, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_ORDER_PRODUCT_DETAIL
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_ORDER_PRODUCT_DETAIL
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.OrderProductDetail">
+    insert into TB_ORDER_PRODUCT_DETAIL (ID, ORDER_ID, PRODUCT_ID, 
+      PRICE, NUM, COLOR, SIZEE, 
+      MONEY, UPDATE_TIME, CREATE_TIME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
+      #{price,jdbcType=FLOAT}, #{num,jdbcType=DECIMAL}, #{color,jdbcType=VARCHAR}, #{sizee,jdbcType=VARCHAR}, 
+      #{money,jdbcType=FLOAT}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.OrderProductDetail">
+    insert into TB_ORDER_PRODUCT_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="productId != null">
+        PRODUCT_ID,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+      <if test="num != null">
+        NUM,
+      </if>
+      <if test="color != null">
+        COLOR,
+      </if>
+      <if test="sizee != null">
+        SIZEE,
+      </if>
+      <if test="money != null">
+        MONEY,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=FLOAT},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=DECIMAL},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="sizee != null">
+        #{sizee,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=FLOAT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.OrderProductDetail">
+    update TB_ORDER_PRODUCT_DETAIL
+    <set>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=FLOAT},
+      </if>
+      <if test="num != null">
+        NUM = #{num,jdbcType=DECIMAL},
+      </if>
+      <if test="color != null">
+        COLOR = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="sizee != null">
+        SIZEE = #{sizee,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        MONEY = #{money,jdbcType=FLOAT},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.OrderProductDetail">
+    update TB_ORDER_PRODUCT_DETAIL
+    set ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=FLOAT},
+      NUM = #{num,jdbcType=DECIMAL},
+      COLOR = #{color,jdbcType=VARCHAR},
+      SIZEE = #{sizee,jdbcType=VARCHAR},
+      MONEY = #{money,jdbcType=FLOAT},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

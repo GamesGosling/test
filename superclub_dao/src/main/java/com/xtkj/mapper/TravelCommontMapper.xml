@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.TravelCommontMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.TravelCommont">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="TRAVEL_ID" jdbcType="VARCHAR" property="travelId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="COMMONT_CONTEXT" jdbcType="VARCHAR" property="commontContext" />
+    <result column="COMMONT_TIME" jdbcType="TIMESTAMP" property="commontTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, TRAVEL_ID, USER_ID, COMMONT_CONTEXT, COMMONT_TIME, UPDATE_TIME, CREATE_TIME, 
+    USER_NAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_TRAVEL_COMMONT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_TRAVEL_COMMONT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.TravelCommont">
+    insert into TB_TRAVEL_COMMONT (ID, TRAVEL_ID, USER_ID, 
+      COMMONT_CONTEXT, COMMONT_TIME, UPDATE_TIME, 
+      CREATE_TIME, USER_NAME)
+    values (#{id,jdbcType=VARCHAR}, #{travelId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{commontContext,jdbcType=VARCHAR}, #{commontTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{userName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.TravelCommont">
+    insert into TB_TRAVEL_COMMONT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="travelId != null">
+        TRAVEL_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="commontContext != null">
+        COMMONT_CONTEXT,
+      </if>
+      <if test="commontTime != null">
+        COMMONT_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="travelId != null">
+        #{travelId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="commontContext != null">
+        #{commontContext,jdbcType=VARCHAR},
+      </if>
+      <if test="commontTime != null">
+        #{commontTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.TravelCommont">
+    update TB_TRAVEL_COMMONT
+    <set>
+      <if test="travelId != null">
+        TRAVEL_ID = #{travelId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="commontContext != null">
+        COMMONT_CONTEXT = #{commontContext,jdbcType=VARCHAR},
+      </if>
+      <if test="commontTime != null">
+        COMMONT_TIME = #{commontTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.TravelCommont">
+    update TB_TRAVEL_COMMONT
+    set TRAVEL_ID = #{travelId,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      COMMONT_CONTEXT = #{commontContext,jdbcType=VARCHAR},
+      COMMONT_TIME = #{commontTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      USER_NAME = #{userName,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

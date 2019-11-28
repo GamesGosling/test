@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.ShiroUserRolesMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.ShiroUserRolesKey">
+    <id column="USER_ID" jdbcType="DECIMAL" property="userId" />
+    <id column="ROLE_ID" jdbcType="DECIMAL" property="roleId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.xtkj.pojo.ShiroUserRolesKey">
+    delete from TB_SHIRO_USER_ROLES
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+      and ROLE_ID = #{roleId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.ShiroUserRolesKey">
+    insert into TB_SHIRO_USER_ROLES (USER_ID, ROLE_ID)
+    values (#{userId,jdbcType=DECIMAL}, #{roleId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.ShiroUserRolesKey">
+    insert into TB_SHIRO_USER_ROLES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="roleId != null">
+        ROLE_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

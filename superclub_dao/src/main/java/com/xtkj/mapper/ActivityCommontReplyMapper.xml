@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xtkj.dao.ActivityCommontReplyMapper">
+	<resultMap id="BaseResultMap"
+		type="com.xtkj.pojo.ActivityCommontReply">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="COMMONT_ID" jdbcType="VARCHAR"
+			property="commontId" />
+		<result column="REPLY_USER_ID" jdbcType="VARCHAR"
+			property="replyUserId" />
+		<result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+		<result column="REPLY_CONTEXT" jdbcType="VARCHAR"
+			property="replyContext" />
+		<result column="UPDATE_TIME" jdbcType="TIMESTAMP"
+			property="updateTime" />
+		<result column="CREATE_TIME" jdbcType="TIMESTAMP"
+			property="createTime" />
+	</resultMap>
+
+	<resultMap id="BaseResultMapUpdate" type="com.xtkj.pojo.ActivityCommentVo">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		
+		<result column="ACTIVITY_ID" property="activityId" jdbcType="VARCHAR" />
+		<result column="COMMONT_CONTEXT" jdbcType="VARCHAR"
+			property="commitContext" />
+		<result column="UPDATE_TIME" jdbcType="TIMESTAMP"
+			property="updateTime" />
+		<result column="CREATE_TIME" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<association property="replyUserId" column="REPLY_USER_ID" javaType="com.xtkj.pojo.User"  select="com.xtkj.dao.UserMapper.selectByPrimaryKey"></association>
+		<association property="userId" column="USER_ID" javaType="com.xtkj.pojo.User" select="com.xtkj.dao.UserMapper.selectByPrimaryKey"></association>
+	</resultMap>
+
+	
+	
+	<select id="listComment" resultMap="BaseResultMapUpdate" parameterType="com.xtkj.pojo.ActivityCommentVo">
+		select * from (select ID,ACTIVITY_ID,null as
+		REPLY_USER_ID,USER_ID,COMMONT_CONTEXT,UPDATE_TIME,CREATE_TIME from
+		TB_ACTIVITY_COMMONT union all
+		(select
+		ID,COMMONT_ID,REPLY_USER_ID,USER_ID,REPLY_CONTEXT,UPDATE_TIME,CREATE_TIME
+		from TB_ACTIVITY_COMMONT_REPLY)) COMMENTS where
+		COMMENTS.ACTIVITY_ID=#{activityId} ORDER BY COMMENTS.CREATE_TIME ASC
+	</select>
+
+	<sql id="Base_Column_List">
+		ID, COMMONT_ID, REPLY_USER_ID, USER_ID, REPLY_CONTEXT,
+		UPDATE_TIME,
+		CREATE_TIME
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from TB_ACTIVITY_COMMONT_REPLY
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		TB_ACTIVITY_COMMONT_REPLY
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.xtkj.pojo.ActivityCommontReply">
+		insert into TB_ACTIVITY_COMMONT_REPLY (ID, COMMONT_ID,
+		REPLY_USER_ID,
+		USER_ID, REPLY_CONTEXT, UPDATE_TIME,
+		CREATE_TIME)
+		values
+		(#{id,jdbcType=VARCHAR}, #{commontId,jdbcType=VARCHAR},
+		#{replyUserId,jdbcType=VARCHAR},
+		#{userId,jdbcType=VARCHAR},
+		#{replyContext,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+		#{createTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.xtkj.pojo.ActivityCommontReply">
+		insert into TB_ACTIVITY_COMMONT_REPLY
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="commontId != null">
+				COMMONT_ID,
+			</if>
+			<if test="replyUserId != null">
+				REPLY_USER_ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="replyContext != null">
+				REPLY_CONTEXT,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="commontId != null">
+				#{commontId,jdbcType=VARCHAR},
+			</if>
+			<if test="replyUserId != null">
+				#{replyUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="replyContext != null">
+				#{replyContext,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.xtkj.pojo.ActivityCommontReply">
+		update TB_ACTIVITY_COMMONT_REPLY
+		<set>
+			<if test="commontId != null">
+				COMMONT_ID = #{commontId,jdbcType=VARCHAR},
+			</if>
+			<if test="replyUserId != null">
+				REPLY_USER_ID = #{replyUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="replyContext != null">
+				REPLY_CONTEXT = #{replyContext,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.xtkj.pojo.ActivityCommontReply">
+		update TB_ACTIVITY_COMMONT_REPLY
+		set COMMONT_ID =
+		#{commontId,jdbcType=VARCHAR},
+		REPLY_USER_ID =
+		#{replyUserId,jdbcType=VARCHAR},
+		USER_ID = #{userId,jdbcType=VARCHAR},
+		REPLY_CONTEXT = #{replyContext,jdbcType=VARCHAR},
+		UPDATE_TIME =
+		#{updateTime,jdbcType=TIMESTAMP},
+		CREATE_TIME =
+		#{createTime,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+
+
+
+
+</mapper>

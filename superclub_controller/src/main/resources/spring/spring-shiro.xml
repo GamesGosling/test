@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+		
+	<bean id="ClubRealm" class="com.xtkj.controller.realm.UserRealm">
+		<!-- <property name="credentialsMatcher" > <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher"> 
+			指定加密算法 <property name="hashAlgorithmName" value="MD5"></property> 设置加密次数 
+			<property name="hashIterations" value="1"></property> </bean> </property> -->
+	</bean>
+
+	<!-- 配置SecMang -->
+	<bean id="securityManager"
+		class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!-- 如果需要多次判断，则需要写多个Realm[] -->
+		<property name="realm" ref="ClubRealm"></property>
+	</bean>
+
+
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<!-- 这里你可以根据需要定义N多个错误异常转发 -->
+				<prop key="org.apache.shiro.authz.UnauthorizedException">redirect:/unauths.jsp</prop>
+				<prop key="org.apache.shiro.authz.UnauthenticatedException">redirect:/error.jsp</prop>
+				<prop key="java.lang.IllegalArgumentException">/redirect:e/rror.jsp</prop>  <!-- 参数错误(bizError.jsp) -->
+				<prop key="java.lang.Exception">/redirect:/error.jsp</prop>  <!-- 其他错误为'未定义错误'(unknowError.jsp) -->
+			</props>
+		</property>
+	</bean>
+
+
+
+	<!-- 此处的id必须和web.xml中的过滤器的filename同名 -->
+	<bean id="shiroFilter"
+		class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager"></property>
+
+		<!-- 认证失败 -->
+		<property name="loginUrl" value="/index.jsp"></property>
+
+		<!-- 授权失败 -->
+		<property name="unauthorizedUrl" value="/unauths.jsp"></property>
+
+		<!-- 认证方式 -->
+		<property name="filterChainDefinitions">
+			<value>
+				/static/** = anon
+				/user/login* = anon
+				/user/register=anon
+				/pages/**=anon
+				/captcha/**=anon
+				/unauths.jsp = anon
+				/friendCircle/** =anon
+				/tourTeam/**=anon
+				/activity/**=anon
+				/album/**=anon
+				/keys/**=anon 
+				/accessory/**=anon
+			</value>
+		</property>
+
+	</bean>
+
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+
+</beans>

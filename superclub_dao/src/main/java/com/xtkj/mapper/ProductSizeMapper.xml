@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.ProductSizeMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.ProductSize">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="SIZEE" jdbcType="VARCHAR" property="sizee" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SIZEE, UPDATE_TIME, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_PRODUCT_SIZE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectSizeByProIdColor" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    a.*
+    from TB_PRODUCT_SIZE a,TB_PRO_COLOR_SIZE_MAP b
+    where b.sizeID=a.id and b.proId=#{proId} and b.colorId=#{colorId}
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_PRODUCT_SIZE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.ProductSize">
+    insert into TB_PRODUCT_SIZE (ID, SIZEE, UPDATE_TIME, 
+      CREATE_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{sizee,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.ProductSize">
+    insert into TB_PRODUCT_SIZE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="sizee != null">
+        SIZEE,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sizee != null">
+        #{sizee,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.ProductSize">
+    update TB_PRODUCT_SIZE
+    <set>
+      <if test="sizee != null">
+        SIZEE = #{sizee,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.ProductSize">
+    update TB_PRODUCT_SIZE
+    set SIZEE = #{sizee,jdbcType=VARCHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

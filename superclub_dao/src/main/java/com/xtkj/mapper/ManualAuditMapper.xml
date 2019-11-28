@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xtkj.dao.ManualAuditMapper">
+  <resultMap id="BaseResultMap" type="com.xtkj.pojo.ManualAudit">
+    <id column="ART_ID" jdbcType="VARCHAR" property="artId" />
+    <result column="PHOTO_ID" jdbcType="VARCHAR" property="photoId" />
+    <result column="AUDIT_MAN" jdbcType="VARCHAR" property="auditMan" />
+    <result column="IS_OK" jdbcType="DECIMAL" property="isOk" />
+    <result column="AUDIT_DATE" jdbcType="TIMESTAMP" property="auditDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="AUDIT_MAN_NAME" jdbcType="VARCHAR" property="auditManName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ART_ID, PHOTO_ID, AUDIT_MAN, IS_OK, AUDIT_DATE, UPDATE_DATE, AUDIT_MAN_NAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TB_MANUAL_AUDIT
+    where ART_ID = #{artId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TB_MANUAL_AUDIT
+    where ART_ID = #{artId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xtkj.pojo.ManualAudit">
+    insert into TB_MANUAL_AUDIT (ART_ID, PHOTO_ID, AUDIT_MAN, 
+      IS_OK, AUDIT_DATE, UPDATE_DATE, 
+      AUDIT_MAN_NAME)
+    values (#{artId,jdbcType=VARCHAR}, #{photoId,jdbcType=VARCHAR}, #{auditMan,jdbcType=VARCHAR}, 
+      #{isOk,jdbcType=DECIMAL}, #{auditDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{auditManName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xtkj.pojo.ManualAudit">
+    insert into TB_MANUAL_AUDIT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="artId != null">
+        ART_ID,
+      </if>
+      <if test="photoId != null">
+        PHOTO_ID,
+      </if>
+      <if test="auditMan != null">
+        AUDIT_MAN,
+      </if>
+      <if test="isOk != null">
+        IS_OK,
+      </if>
+      <if test="auditDate != null">
+        AUDIT_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="auditManName != null">
+        AUDIT_MAN_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="artId != null">
+        #{artId,jdbcType=VARCHAR},
+      </if>
+      <if test="photoId != null">
+        #{photoId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditMan != null">
+        #{auditMan,jdbcType=VARCHAR},
+      </if>
+      <if test="isOk != null">
+        #{isOk,jdbcType=DECIMAL},
+      </if>
+      <if test="auditDate != null">
+        #{auditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditManName != null">
+        #{auditManName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xtkj.pojo.ManualAudit">
+    update TB_MANUAL_AUDIT
+    <set>
+      <if test="photoId != null">
+        PHOTO_ID = #{photoId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditMan != null">
+        AUDIT_MAN = #{auditMan,jdbcType=VARCHAR},
+      </if>
+      <if test="isOk != null">
+        IS_OK = #{isOk,jdbcType=DECIMAL},
+      </if>
+      <if test="auditDate != null">
+        AUDIT_DATE = #{auditDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditManName != null">
+        AUDIT_MAN_NAME = #{auditManName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ART_ID = #{artId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xtkj.pojo.ManualAudit">
+    update TB_MANUAL_AUDIT
+    set PHOTO_ID = #{photoId,jdbcType=VARCHAR},
+      AUDIT_MAN = #{auditMan,jdbcType=VARCHAR},
+      IS_OK = #{isOk,jdbcType=DECIMAL},
+      AUDIT_DATE = #{auditDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      AUDIT_MAN_NAME = #{auditManName,jdbcType=VARCHAR}
+    where ART_ID = #{artId,jdbcType=VARCHAR}
+  </update>
+</mapper>
